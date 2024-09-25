@@ -1,0 +1,188 @@
+[gd_scene load_steps=21 format=3 uid="uid://wqjkv5x8f776"]
+
+[ext_resource type="Script" path="res://CharacterMovement.gd" id="2_sl3pj"]
+[ext_resource type="PackedScene" uid="uid://dppjoye7xt1so" path="res://finalarmt.glb" id="4_0fugl"]
+[ext_resource type="Script" path="res://AudioStreamPlayer.gd" id="4_jujc7"]
+[ext_resource type="Script" path="res://hand.gd" id="4_l8o1t"]
+[ext_resource type="Script" path="res://Jarsio.gd" id="5_075aq"]
+[ext_resource type="Script" path="res://JarsioNav.gd" id="6_m2ecq"]
+[ext_resource type="Script" path="res://JarsioAnim.gd" id="7_hgwkt"]
+[ext_resource type="PackedScene" uid="uid://cgo5qjbqmd0e" path="res://jarwalllk.glb" id="7_q15dt"]
+[ext_resource type="Script" path="res://ProgressBar.gd" id="9_5xrb7"]
+[ext_resource type="Texture2D" uid="uid://be4ql4aa1pr8e" path="res://mic_24dp_FFFFFF_FILL0_wght400_GRAD200_opsz24.svg" id="10_gn4eh"]
+[ext_resource type="Script" path="res://movement.gd" id="11_7iwj6"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_668xl"]
+height = 1.7
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_le4f3"]
+height = 1.40655
+
+[sub_resource type="Environment" id="Environment_3v4e7"]
+background_mode = 1
+ambient_light_color = Color(0.643137, 0.643137, 0.643137, 1)
+ambient_light_energy = 0.01
+
+[sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_ggsek"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bidp1"]
+height = 1.82473
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_c6878"]
+vertices = PackedVector3Array(-9.235, 0.773816, 0.00495338, -5.735, 0.773816, 0.00495338, -5.485, 0.773816, -1.24505, -9.235, 0.773816, -6.99505, 5.515, 0.773816, -1.24505, 5.765, 0.773816, 0.00495338, 9.265, 0.773816, 0.00495338, 9.265, 0.773816, -6.99505, 9.265, 0.773816, -6.99505, 9.265, 0.773816, -13.995, 0.0149956, 0.773816, -13.995, -9.235, 0.773816, -6.99505, -5.485, 0.773816, -1.24505, 5.515, 0.773816, -1.24505, 0.0149956, 0.773816, -13.995, -9.235, 0.773816, -13.995, -9.235, 0.773816, -6.99505, -4.735, 3.02382, -0.245047, -4.735, 3.02382, 0.254953, 4.765, 3.02382, 0.254953, 4.765, 3.02382, -0.245047, 9.265, 0.773816, 0.00495338, 5.765, 0.773816, 0.00495338, 5.515, 0.773816, 1.25495, 9.265, 0.773816, 7.00495, -5.485, 0.773816, 1.25495, -5.735, 0.773816, 0.00495338, -9.235, 0.773816, 0.00495338, -9.235, 0.773816, 7.00495, -9.235, 0.773816, 7.00495, -9.235, 0.773816, 14.005, 0.0149956, 0.773816, 14.005, 9.265, 0.773816, 7.00495, 5.515, 0.773816, 1.25495, -5.485, 0.773816, 1.25495, 0.0149956, 0.773816, 14.005, 9.265, 0.773816, 14.005, 9.265, 0.773816, 7.00495)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(8, 13, 9), PackedInt32Array(9, 13, 10), PackedInt32Array(10, 13, 12), PackedInt32Array(10, 12, 11), PackedInt32Array(16, 15, 14), PackedInt32Array(20, 19, 17), PackedInt32Array(17, 19, 18), PackedInt32Array(22, 21, 23), PackedInt32Array(23, 21, 24), PackedInt32Array(26, 25, 27), PackedInt32Array(27, 25, 28), PackedInt32Array(29, 34, 30), PackedInt32Array(30, 34, 31), PackedInt32Array(31, 34, 33), PackedInt32Array(31, 33, 32), PackedInt32Array(37, 36, 35)]
+
+[sub_resource type="GDScript" id="GDScript_bu6r6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_60ovy"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c8nsk"]
+bg_color = Color(0.345098, 0.345098, 0.345098, 1)
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[node name="World" type="Node3D"]
+script = ExtResource("5_075aq")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.53439, -2.96814)
+script = ExtResource("2_sl3pj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.782066, -0.0017757)
+shape = SubResource("CapsuleShape3D_668xl")
+
+[node name="Neck" type="Node3D" parent="Player"]
+
+[node name="Camera3D" type="Camera3D" parent="Player/Neck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.808094, 0)
+fov = 70.0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Player/Neck/Camera3D"]
+transform = Transform3D(0.998902, -0.042445, -0.0198098, 0.0423764, 0.999094, -0.00387127, 0.0199562, 0.00302755, 0.999796, -0.1665, 0.0285742, -0.0550265)
+light_color = Color(0.733333, 0.701961, 0.552941, 1)
+light_energy = 4.0
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 8.0
+shadow_blur = 3.727
+spot_range = 6.28183
+spot_angle = 28.1267
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Player/Neck/Camera3D"]
+light_energy = 0.5
+omni_range = 3.0
+
+[node name="finalarmt" parent="Player/Neck" instance=ExtResource("4_0fugl")]
+transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, -0.729848, 0.00299608)
+script = ExtResource("4_l8o1t")
+
+[node name="are" type="Area3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.84005, -0.0834785)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/are"]
+shape = SubResource("CapsuleShape3D_le4f3")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3v4e7")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamMicrophone_ggsek")
+autoplay = true
+bus = &"Record"
+script = ExtResource("4_jujc7")
+
+[node name="Jarsio" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12898, 1.98236)
+script = ExtResource("6_m2ecq")
+
+[node name="Neck" type="Node3D" parent="Jarsio"]
+
+[node name="jarwalllk" parent="Jarsio/Neck" instance=ExtResource("7_q15dt")]
+transform = Transform3D(-1.31134e-09, 0, 0.03, 0, 0.03, 0, -0.03, 0, -1.31134e-09, 0, -0.909391, 0)
+script = ExtResource("7_hgwkt")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Jarsio"]
+
+[node name="Area3D" type="Area3D" parent="Jarsio"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Jarsio/Area3D"]
+shape = SubResource("CapsuleShape3D_le4f3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Jarsio"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_bidp1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.00970388, 0.999953, 0, -0.999953, -0.00970388, 0, 146.71, 0)
+light_energy = 2.194
+light_indirect_energy = 16.0
+editor_only = true
+
+[node name="Map" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_c6878")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Map"]
+transform = Transform3D(10.2571, 0, 0, 0, 3.64214, 0, 0, 0, 1.39402, 0, 0.844886, 0)
+use_collision = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Map"]
+transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 30, 0, 0, 0)
+use_collision = true
+
+[node name="Node" type="Node" parent="."]
+script = SubResource("GDScript_bu6r6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Node"]
+
+[node name="Control" type="Control" parent="Node/CanvasLayer"]
+layout_mode = 3
+anchor_right = 1.003
+anchor_bottom = 1.0
+offset_right = -0.456055
+offset_bottom = -1.0
+mouse_filter = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="Node/CanvasLayer/Control"]
+layout_mode = 2
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -485.0
+offset_right = -32.0
+offset_bottom = -96.0
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_60ovy")
+theme_override_styles/fill = SubResource("StyleBoxFlat_c8nsk")
+value = 5.0
+fill_mode = 3
+show_percentage = false
+script = ExtResource("9_5xrb7")
+
+[node name="TextureRect" type="TextureRect" parent="Node/CanvasLayer/Control"]
+modulate = Color(0.443137, 0, 0.0313726, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -88.0001
+offset_top = -84.0001
+offset_right = 2312.0
+offset_bottom = 2316.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.03, 0.03)
+mouse_filter = 2
+texture = ExtResource("10_gn4eh")
+
+[node name="Node3D" type="Node3D" parent="."]
+script = ExtResource("11_7iwj6")
+
+[connection signal="noise" from="." to="Jarsio" method="_on_world_noise"]
+[connection signal="area_entered" from="Player/are" to="." method="_on_area_3d_area_entered"]
+[connection signal="db" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_db"]
+[connection signal="db" from="AudioStreamPlayer" to="Node/CanvasLayer/Control/ProgressBar" method="_on_audio_stream_player_db"]
+[connection signal="area_entered" from="Jarsio/Area3D" to="Node3D" method="_on_area_3d_area_entered"]
